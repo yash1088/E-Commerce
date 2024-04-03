@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Products</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Your existing CSS styles */
+        /* Add additional CSS styles for enhanced layout */
+        body {
+            padding-top: 70px; /* Adjusted padding for space between navbar and body */
+            background-color: #f4f4f4;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            height: 100px; /* Adjust the height as needed */
+            display: none; /* Initially hide the footer */
+        }
+        .navbar .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Optional: Adjust the width of the search input */
+    .navbar .search-container input[type="search"] {
+        width: 300px; /* Adjust as needed */
+    
+    }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">FreshDaily Dashboard</a>
+    
+    <!-- Centered search form -->
+    <div class="search-container">
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+   
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/products}">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/orders}">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/customers}">Customers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/settings}">Settings</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container mt-5">
+    <h2>Products</h2>
+    <!-- Use a card layout to display each product -->
+    <div class="row">
+        <div class="col-md-4 mb-4" th:each="product : ${productList}">
+            <div class="card">
+                <img th:src="${product.imageURL}" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.name}"></h5>
+                    <p class="card-text" th:text="${product.description}"></p>
+                    <p class="card-text" th:text="'Price: $' + ${product.price}"></p>
+                    <!-- Add a button to view product details or add to cart -->
+                    <a href="#" class="btn btn-primary">View Details</a>
+                    <a href="#" class="btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of card layout -->
+
+    <!-- Links for adding, modifying, and deleting products -->
+    <div class="mt-3">
+        <a th:href="@{/addproduct}" class="btn btn-primary">Add Product</a>
+        <a th:href="@{/editproduct}" class="btn btn-secondary">Modify Product</a>
+        <a th:href="@{/deleteproduct}" class="btn btn-danger">Delete Product</a>
+    </div>
+    <!-- End of links -->
+</div>
+
+<footer class="footer" id="myFooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h5>Back to top</h5>
+            </div>
+            <div class="col-lg-4">
+                <h5>Get to Know Us</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Releases</a></li>
+                    <li><a href="#">Amazon Science</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h5>Connect with Us</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-4">
+                <h5>Make Money with Us</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Sell on Amazon</a></li>
+                    <li><a href="#">Sell under Amazon Accelerator</a></li>
+                    <!-- Add more links as needed -->
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h5>Let Us Help You</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Returns Centre</a></li>
+                    <!-- Add more links as needed -->
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h5>Languages</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">English</a></li>
+                    <li><a href="#">Spanish</a></li>
+                    <!-- Add more languages as needed -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="text-center">
+        <p>
+            <a href="#">Conditions of Use & Sale</a> | 
+            <a href="#">Privacy Notice</a> | 
+            <a href="#">Interest-Based Ads</a>
+        </p>
+        <p>© 1996-2024, Amazon.com, Inc. or its affiliates</p>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // Hide the footer initially
+    $(document).ready(function() {
+        $("#myFooter").hide();
+    });
+
+    // Show the footer after the entire page is loaded
+    $(window).on("load", function() {
+        $("#myFooter").show();
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

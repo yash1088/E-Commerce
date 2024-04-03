@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Employee</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Add New Product</h2>
+                        <form th:action="@{/addprodstat}" th:object="${product}" method="post">
+                            <div class="form-group">
+                                <label for="lastName">Name</label>
+                                <input type="text" class="form-control" id="lastName" th:field="*{name}" placeholder="Enter name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Price</label>
+                                <input type="text" class="form-control" id="email" th:field="*{price}" placeholder="Enter email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="department">Category</label>
+                                <input type="text" class="form-control" id="department" th:field="*{category}" placeholder="Enter department" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Description">Description</label>
+                                <input type="text" class="form-control" id="description" th:field="*{description}" placeholder="Enter Description" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="department">ImageURL</label>
+                                <input type="text" class="form-control" id="ImageURL" th:field="*{ImageURL}" placeholder="Enter Product URL" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="department">Rating</label>
+                                <input type="text" class="form-control" id="Rating" th:field="*{Rating}" placeholder="Enter Rating" required>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-block mt-4">Add Employee</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: APIGateway
+  cloud:
+    gateway:
+      routes:
+        - id: productmicroservice
+          uri: lb://productmicroservice
+          predicates:
+            - Path=/product/**
+        - id: ordermicroservice
+          uri: lb://ordermicroservice
+          predicates:
+            - Path=/order/**
