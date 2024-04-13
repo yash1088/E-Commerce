@@ -43,7 +43,15 @@
                 border-radius: 10px;
                 overflow: hidden;
                 position: relative;
+                ;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+                transition: box-shadow 0.3s ease;
             }
+
+            .product-card:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+            }
+
             .product-card img {
                 width: 100%;
                 height: 200px; /* Adjust the height as needed */
@@ -72,6 +80,7 @@
                 cursor: pointer;
                 transition: color 0.3s ease;
                 margin-left: 15px;
+                margin-right: 35px
             }
             .wishlist-btn:hover {
                 color: #ff3366;
@@ -120,375 +129,116 @@
         </style>
     </head>
     <body>
-
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-            <div class="container-fluid">
-                <!-- Add the logo -->
-                <a class="navbar-brand mr-3" href="#">
-                    <img src="https://banner2.cleanpng.com/20180519/jjs/kisspng-e-commerce-logo-electronic-business-5b00d2d0918d84.2335269315267806245962.jpg" alt="Ecommerce Logo" style="height: 50px; width: 70px; border-radius: 50%;">
-                </a>
-                <!-- Text "Ecommerce Website" -->
-                <span class="navbar-text mr-auto">Ecommerce Website</span>
-
-                <!-- Center the search form -->
-                <div class="mx-auto order-0">
-                    <div class="search-form">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search products..." aria-label="Search">
-                            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                    </div>
-                </div>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
+        <div th:include="Header.html"></div>
 
         <div class="container-fluid">
-           <div class="row">
-        <div class="col-md-4">
-            <h4 class="mt-4">Filters</h4>
-        </div>
-        <div class="col-md-8">
             <div class="row">
-                <div class="col-md-2">
-
-                                <div class="card-header bg-light" id="bundlesHeading">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link d-flex align-items-center" data-toggle="collapse" data-target="#bundlesCollapse" aria-expanded="true" aria-controls="bundlesCollapse">
-                                            Bundles <i class="fa fa-caret-down ml-auto"></i>
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="bundlesCollapse" class="collapse" aria-labelledby="bundlesHeading">
-                                    <div class="card-body">
-                                        <div class="bundle-item">
-                                            <h6>Bundle 1</h6>
-                                            <div class="checkboxes-horizontal">
-                                                <input type="checkbox" id="bundle1-product1" name="bundle1-product1">
-                                                <label for="bundle1-product1">Product 1</label>
-                                                <input type="checkbox" id="bundle1-product2" name="bundle1-product2">
-                                                <label for="bundle1-product2">Product 2</label>
-                                                <input type="checkbox" id="bundle1-product3" name="bundle1-product3">
-                                                <label for="bundle1-product3">Product 3</label>
-                                            </div>
-                                        </div>
-                                        <div class="bundle-item">
-                                            <h6>Bundle 2</h6>
-                                            <div class="checkboxes-horizontal">
-                                                <input type="checkbox" id="bundle2-product4" name="bundle2-product4">
-                                                <label for="bundle2-product4">Product 4</label>
-                                                <input type="checkbox" id="bundle2-product5" name="bundle2-product5">
-                                                <label for="bundle2-product5">Product 5</label>
-                                                <input type="checkbox" id="bundle2-product6" name="bundle2-product6">
-                                                <label for="bundle2-product6">Product 6</label>
-                                            </div>
-                                        </div>
-                                        <!-- Add more bundles as needed -->
-                                    </div>
-
-                                </div>
-
-                            </div>
-                
-                <div class="col-md-3">
-                    <!-- Country of Origin -->
-                    <div class="card-header bg-light" id="countryOfOriginsHeading">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed d-flex align-items-center" data-toggle="collapse" data-target="#countryOfOriginsCollapse" aria-expanded="false" aria-controls="countryOfOriginsCollapse">
-                                Country of Origin <i class="fa fa-caret-down ml-auto"></i>
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="countryOfOriginsCollapse" class="collapse" aria-labelledby="countryOfOriginsHeading">
-                        <div class="card-body">
-                            <!-- Content for country of origins -->
-                        </div>
-                    </div>
+                <div class="col-md-4">
+                    <h4 class="mt-4">Filters</h4>
                 </div>
-                <div class="col-md-2">
-                    <!-- Size -->
-                    <div class="card-header bg-light" id="sizeHeading">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed d-flex align-items-center" data-toggle="collapse" data-target="#sizeCollapse" aria-expanded="false" aria-controls="sizeCollapse">
-                                Size <i class="fa fa-caret-down ml-auto"></i>
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="sizeCollapse" class="collapse" aria-labelledby="sizeHeading">
-                        <div class="card-body">
-                            <!-- Content for size -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <!-- Sort By -->
-                    <div class="card-header bg-light" id="sortHeading">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed d-flex align-items-center" data-toggle="collapse" data-target="#sortCollapse" aria-expanded="false" aria-controls="sortCollapse">
-                                Sort By <i class="fa fa-caret-down ml-auto"></i>
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="sortCollapse" class="collapse" aria-labelledby="sortHeading">
-                        <div class="card-body">
-                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sortOption" id="recommended" value="recommended">
-                                                <label class="form-check-label" for="recommended">
-                                                    Recommended
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sortOption" id="new" value="new">
-                                                <label class="form-check-label" for="new">
-                                                    New
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sortOption" id="old" value="old">
-                                                <label class="form-check-label" for="old">
-                                                    Old Collection
-                                                </label>
-                                            </div>
-                                        </div>
-                                    
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-          
-            <div class="row">
-                <div class="col-md-2.5 filters" style="margin-left: 20px">
-                    <div class="filter-option">
-                        <hr>
-                        <div class="filter-title">CATEGORIES</div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="category1" name="category1">
-                            <label for="category1">Tshirts <span class="filter-count">(122190)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="category2" name="category2">
-                            <label for="category2">Lounge Tshirts <span class="filter-count">(750)</span></label>
-                        </div>
-                        <div class="more-link">+ 749 more</div>
-                    </div>
-                    <hr>
-                    <div class="filter-option">
-                        <div class="filter-title">BRAND</div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="brand1" name="brand1">
-                            <label for="brand1">Roadster <span class="filter-count">(3562)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="brand2" name="brand2">
-                            <label for="brand2">Friskers <span class="filter-count">(2800)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="brand3" name="brand3">
-                            <label for="brand3">HRX by Hrithik Roshan <span class="filter-count">(2284)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="brand4" name="brand4">
-                            <label for="brand4">WROGN <span class="filter-count">(1920)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="brand5" name="brand5">
-                            <label for="brand5">Tommy Hilfiger <span class="filter-count">(1777)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="brand6" name="brand6">
-                            <label for="brand6">Jack & Jones <span class="filter-count">(1683)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="brand7" name="brand7">
-                            <label for="brand7">U.S. Polo Assn. <span class="filter-count">(1648)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="brand8" name="brand8">
-                            <label for="brand8">VIMAL JONNEY <span class="filter-count">(1576)</span></label>
-                        </div>
-                        <div class="more-link">+ 749 more</div>
-                    </div>
-                    <hr>
-                    <div class="filter-option">
-                        <div class="filter-title">PRICE</div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="price1" name="price1">
-                            <label for="price1">Rs. 139 to Rs. 9105 <span class="filter-count">(122405)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="price2" name="price2">
-                            <label for="price2">Rs. 9105 to Rs. 18071 <span class="filter-count">(483)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="price3" name="price3">
-                            <label for="price3">Rs. 18071 to Rs. 27037 <span class="filter-count">(48)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="price4" name="price4">
-                            <label for="price4">Rs. 27037 to Rs. 36003 <span class="filter-count">(4)</span></label>
-                        </div>
-                        <div class="more-link">+ 749 more</div>
-                    </div>
-                    <hr>
-                    <div class="filter-option">
-                        <div class="filter-title">COLOR</div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="color1" name="color1">
-                            <label for="color1"><span class="color-circle" style="background-color: black;"></span> Black <span class="filter-count">(18904)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="color2" name="color2">
-                            <label for="color2"><span class="color-circle" style="background-color: blue;"></span> Blue <span class="filter-count">(15697)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="color3" name="color3">
-                            <label for="color3"><span class="color-circle" style="background-color: white;"></span> White <span class="filter-count">(14280)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="color4" name="color4">
-                            <label for="color4"><span class="color-circle" style="background-color: navy;"></span> Navy Blue <span class="filter-count">(10989)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="color5" name="color5">
-                            <label for="color5"><span class="color-circle" style="background-color: green;"></span> Green <span class="filter-count">(8901)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="color6" name="color6">
-                            <label for="color6"><span class="color-circle" style="background-color: grey;"></span> Grey <span class="filter-count">(7114)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="color7" name="color7">
-                            <label for="color7"><span class="color-circle" style="background-color: red;"></span> Red <span class="filter-count">(6081)</span></label>
-                        </div>
-                        <div class="more-link">+ 39 more</div>
-                    </div>
-                    <hr>
-                    <div class="filter-option">
-                        <div class="filter-title">DISCOUNT RANGE</div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="discount1" name="discount1">
-                            <label for="discount1">10% and above</label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="discount2" name="discount2">
-                            <label for="discount2">20% and above</label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="discount3" name="discount3">
-                            <label for="discount3">30% and above</label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="discount4" name="discount4">
-                            <label for="discount4">40% and above</label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="discount5" name="discount5">
-                            <label for="discount5">50% and above</label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="discount6" name="discount6">
-                            <label for="discount6">60% and above</label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="discount7" name="discount7">
-                            <label for="discount7">70% and above</label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="discount8" name="discount8">
-                            <label for="discount8">80% and above</label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="discount9" name="discount9">
-                            <label for="discount9">90% and above</label>
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- Additional Filter Options -->
-                    <div class="filter-option">
-                        <div class="filter-title">SIZE</div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="size1" name="size1">
-                            <label for="size1">Small <span class="filter-count">(3200)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="size2" name="size2">
-                            <label for="size2">Medium <span class="filter-count">(5000)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="size3" name="size3">
-                            <label for="size3">Large <span class="filter-count">(4000)</span></label>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="filter-option">
-                        <div class="filter-title">MATERIAL</div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="material1" name="material1">
-                            <label for="material1">Cotton <span class="filter-count">(8000)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="material2" name="material2">
-                            <label for="material2">Polyester <span class="filter-count">(6000)</span></label>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" id="material3" name="material3">
-                            <label for="material3">Blend <span class="filter-count">(4000)</span></label>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-9">
-
-               
+                <div class="col-md-8">
                     <div class="row">
-                        
-                        <div class="col-md-4" th:each="product : ${products}">
-                            <div class="product-card">
-                                <!-- Dynamic image source based on product imageUrl -->
-                                <img th:src="${product.imageUrl}" class="card-img-top" alt="Product Image">
+                        <div class="col-md-2">
+
+                            <div class="card-header bg-light" id="bundlesHeading">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link d-flex align-items-center" data-toggle="collapse" data-target="#bundlesCollapse" aria-expanded="true" aria-controls="bundlesCollapse">
+                                        Bundles <i class="fa fa-caret-down ml-auto"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="bundlesCollapse" class="collapse" aria-labelledby="bundlesHeading">
                                 <div class="card-body">
-                                    <!-- Dynamic product name -->
-                                    <h5 class="card-title" th:text="${product.name}">Product Name</h5>
-                                    <!-- Dynamic product description with scroll -->
-                                    <p class="card-text" th:text="${product.description}">Description</p>
-                                    <!-- Dynamic product price -->
-                                    <p class="card-text" th:text="'Price: $' + ${product.price}">Price</p>
-                                    <!-- Dynamic product category -->
-                                    <p class="card-text" th:text="${product.category}">Category</p>
-                                    <!-- Buttons for Add to Wishlist and View Details -->
-                                    <div class="row mt-3">
-
-                                        <button class="wishlist-btn"><span>&#10084;</span> Add to Wishlist</button>
-
-                                        <div class="col-6 text-right">
-                                            <a href="#" class="btn btn-primary">View Details</a>
+                                    <div class="bundle-item">
+                                        <h6>Bundle 1</h6>
+                                        <div class="checkboxes-horizontal">
+                                            <input type="checkbox" id="bundle1-product1" name="bundle1-product1">
+                                            <label for="bundle1-product1">Product 1</label>
+                                            <input type="checkbox" id="bundle1-product2" name="bundle1-product2">
+                                            <label for="bundle1-product2">Product 2</label>
+                                            <input type="checkbox" id="bundle1-product3" name="bundle1-product3">
+                                            <label for="bundle1-product3">Product 3</label>
                                         </div>
                                     </div>
+                                    <div class="bundle-item">
+                                        <h6>Bundle 2</h6>
+                                        <div class="checkboxes-horizontal">
+                                            <input type="checkbox" id="bundle2-product4" name="bundle2-product4">
+                                            <label for="bundle2-product4">Product 4</label>
+                                            <input type="checkbox" id="bundle2-product5" name="bundle2-product5">
+                                            <label for="bundle2-product5">Product 5</label>
+                                            <input type="checkbox" id="bundle2-product6" name="bundle2-product6">
+                                            <label for="bundle2-product6">Product 6</label>
+                                        </div>
+                                    </div>
+                                    <!-- Add more bundles as needed -->
                                 </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <!-- Country of Origin -->
+                            <div class="card-header bg-light" id="countryOfOriginsHeading">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed d-flex align-items-center" data-toggle="collapse" data-target="#countryOfOriginsCollapse" aria-expanded="false" aria-controls="countryOfOriginsCollapse">
+                                        Country of Origin <i class="fa fa-caret-down ml-auto"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="countryOfOriginsCollapse" class="collapse" aria-labelledby="countryOfOriginsHeading">
+                                <div class="card-body">
+                                    <!-- Content for country of origins -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <!-- Size -->
+                            <div class="card-header bg-light" id="sizeHeading">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed d-flex align-items-center" data-toggle="collapse" data-target="#sizeCollapse" aria-expanded="false" aria-controls="sizeCollapse">
+                                        Size <i class="fa fa-caret-down ml-auto"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="sizeCollapse" class="collapse" aria-labelledby="sizeHeading">
+                                <div class="card-body">
+                                    <!-- Content for size -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <!-- Sort By -->
+                            <div class="card-header bg-light" id="sortHeading">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed d-flex align-items-center" data-toggle="collapse" data-target="#sortCollapse" aria-expanded="false" aria-controls="sortCollapse">
+                                        Sort By <i class="fa fa-caret-down ml-auto"></i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="sortCollapse" class="collapse" aria-labelledby="sortHeading">
+                                <div class="card-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sortOption" id="recommended" value="recommended">
+                                        <label class="form-check-label" for="recommended">
+                                            Recommended
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sortOption" id="new" value="new">
+                                        <label class="form-check-label" for="new">
+                                            New
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sortOption" id="old" value="old">
+                                        <label class="form-check-label" for="old">
+                                            Old Collection
+                                        </label>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -496,75 +246,309 @@
             </div>
         </div>
 
-        <footer class="footer bg-dark text-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h5>ONLINE SHOPPING</h5>
-                        <ul>
-                            <li>Men</li>
-                            <li>Women</li>
-                            <li>Kids</li>
-                            <li>Home & Living</li>
-                            <li>Beauty</li>
-                            <li>Gift Cards</li>
-                            <li>Myntra Insider</li>
-                        </ul>
+        <div class="row">
+            <div class="col-md-2.5 filters" style="margin-left: 20px">
+                <div class="filter-option">
+                    <hr>
+                    <div class="filter-title">CATEGORIES</div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="category1" name="category1">
+                        <label for="category1">Tshirts <span class="filter-count">(122190)</span></label>
                     </div>
-                    <div class="col-md-4">
-                        <h5>USEFUL LINKS</h5>
-                        <ul>
-                            <li>Blog</li>
-                            <li>Careers</li>
-                            <li>Site Map</li>
-                            <li>Corporate Information</li>
-                            <li>Whitehat</li>
-                            <li>Cleartrip</li>
-                        </ul>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="category2" name="category2">
+                        <label for="category2">Lounge Tshirts <span class="filter-count">(750)</span></label>
                     </div>
-                    <div class="col-md-4">
-                        <h5>CUSTOMER POLICIES</h5>
-                        <ul>
-                            <li>Contact Us</li>
-                            <li>FAQ</li>
-                            <li>T&C</li>
-                            <li>Terms Of Use</li>
-                            <li>Track Orders</li>
-                            <li>Shipping</li>
-                            <li>Cancellation</li>
-                            <li>Returns</li>
-                            <li>Privacy policy</li>
-                            <li>Grievance Officer</li>
-                        </ul>
+                    <div class="more-link">+ 749 more</div>
+                </div>
+                <hr>
+                <div class="filter-option">
+                    <div class="filter-title">BRAND</div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="brand1" name="brand1">
+                        <label for="brand1">Roadster <span class="filter-count">(3562)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="brand2" name="brand2">
+                        <label for="brand2">Friskers <span class="filter-count">(2800)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="brand3" name="brand3">
+                        <label for="brand3">HRX by Hrithik Roshan <span class="filter-count">(2284)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="brand4" name="brand4">
+                        <label for="brand4">WROGN <span class="filter-count">(1920)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="brand5" name="brand5">
+                        <label for="brand5">Tommy Hilfiger <span class="filter-count">(1777)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="brand6" name="brand6">
+                        <label for="brand6">Jack & Jones <span class="filter-count">(1683)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="brand7" name="brand7">
+                        <label for="brand7">U.S. Polo Assn. <span class="filter-count">(1648)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="brand8" name="brand8">
+                        <label for="brand8">VIMAL JONNEY <span class="filter-count">(1576)</span></label>
+                    </div>
+                    <div class="more-link">+ 749 more</div>
+                </div>
+                <hr>
+                <div class="filter-option">
+                    <div class="filter-title">PRICE</div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="price1" name="price1">
+                        <label for="price1">Rs. 139 to Rs. 9105 <span class="filter-count">(122405)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="price2" name="price2">
+                        <label for="price2">Rs. 9105 to Rs. 18071 <span class="filter-count">(483)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="price3" name="price3">
+                        <label for="price3">Rs. 18071 to Rs. 27037 <span class="filter-count">(48)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="price4" name="price4">
+                        <label for="price4">Rs. 27037 to Rs. 36003 <span class="filter-count">(4)</span></label>
+                    </div>
+                    <div class="more-link">+ 749 more</div>
+                </div>
+                <hr>
+                <div class="filter-option">
+                    <div class="filter-title">COLOR</div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="color1" name="color1">
+                        <label for="color1"><span class="color-circle" style="background-color: black;"></span> Black <span class="filter-count">(18904)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="color2" name="color2">
+                        <label for="color2"><span class="color-circle" style="background-color: blue;"></span> Blue <span class="filter-count">(15697)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="color3" name="color3">
+                        <label for="color3"><span class="color-circle" style="background-color: white;"></span> White <span class="filter-count">(14280)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="color4" name="color4">
+                        <label for="color4"><span class="color-circle" style="background-color: navy;"></span> Navy Blue <span class="filter-count">(10989)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="color5" name="color5">
+                        <label for="color5"><span class="color-circle" style="background-color: green;"></span> Green <span class="filter-count">(8901)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="color6" name="color6">
+                        <label for="color6"><span class="color-circle" style="background-color: grey;"></span> Grey <span class="filter-count">(7114)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="color7" name="color7">
+                        <label for="color7"><span class="color-circle" style="background-color: red;"></span> Red <span class="filter-count">(6081)</span></label>
+                    </div>
+                    <div class="more-link">+ 39 more</div>
+                </div>
+                <hr>
+                <div class="filter-option">
+                    <div class="filter-title">DISCOUNT RANGE</div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="discount1" name="discount1">
+                        <label for="discount1">10% and above</label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="discount2" name="discount2">
+                        <label for="discount2">20% and above</label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="discount3" name="discount3">
+                        <label for="discount3">30% and above</label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="discount4" name="discount4">
+                        <label for="discount4">40% and above</label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="discount5" name="discount5">
+                        <label for="discount5">50% and above</label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="discount6" name="discount6">
+                        <label for="discount6">60% and above</label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="discount7" name="discount7">
+                        <label for="discount7">70% and above</label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="discount8" name="discount8">
+                        <label for="discount8">80% and above</label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="discount9" name="discount9">
+                        <label for="discount9">90% and above</label>
                     </div>
                 </div>
                 <hr>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5>EXPERIENCE MYNTRA APP ON MOBILE</h5>
-                        <!-- Add relevant content about the mobile app experience -->
+                <!-- Additional Filter Options -->
+                <div class="filter-option">
+                    <div class="filter-title">SIZE</div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="size1" name="size1">
+                        <label for="size1">Small <span class="filter-count">(3200)</span></label>
                     </div>
-                    <div class="col-md-6">
-                        <h5>KEEP IN TOUCH</h5>
-                        <p>100% ORIGINAL guarantee for all products at myntra.com</p>
-                        <p>Return within 14 days of receiving your order</p>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="size2" name="size2">
+                        <label for="size2">Medium <span class="filter-count">(5000)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="size3" name="size3">
+                        <label for="size3">Large <span class="filter-count">(4000)</span></label>
                     </div>
                 </div>
                 <hr>
+                <div class="filter-option">
+                    <div class="filter-title">MATERIAL</div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="material1" name="material1">
+                        <label for="material1">Cotton <span class="filter-count">(8000)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="material2" name="material2">
+                        <label for="material2">Polyester <span class="filter-count">(6000)</span></label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="material3" name="material3">
+                        <label for="material3">Blend <span class="filter-count">(4000)</span></label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+            <div class="col-md-9">
+
                 <div class="row">
-                    <div class="col-md-12">
-                        <p>POPULAR SEARCHES</p>
-                        <!-- Add relevant content about popular searches -->
-                        <p>In case of any concern, <a href="#">Contact Us</a></p>
-                        <p>&copy; 2024 <a href="www.c.com">www.ecommerce.com</a>. All rights reserved. A Flipkart company</p>
+
+                    <div class="col-md-4" th:each="product : ${products}">
+                        <div class="product-card">
+                            <!-- Dynamic image source based on product imageUrl -->
+                            <img th:src="${product.imageUrl}" class="card-img-top" alt="Product Image">
+                            <div class="card-body">
+                                <!-- Dynamic product name -->
+                                <h5 class="card-title" th:text="${product.name}" style="margin-bottom: 5px">Product Name</h5>
+                                <!-- Dynamic product description with scroll -->
+                                <p class="card-text" th:text="${product.description}">Description</p>
+                                <!-- Dynamic product price -->
+                                <p class="card-text" th:text="'Price: $' + ${product.price}">Price</p>
+                                <!-- Dynamic product category -->
+                                <p class="card-text" th:text="${product.category}">Category</p>
+                                <!-- Product quantity dropdown -->
+                                <div class="form-group">
+
+                                    <label for="quantitySelect">Quantity:</label>
+                                    <select class="form-control quantitySelect" th:value="${product.quantity}">
+                                        <!-- Option tag for quantity -->
+                                        <option th:each="qty : ${#numbers.sequence(1, product.quantity)}" th:value="${qty}" th:text="${qty}"></option>
+                                    </select>
+
+                                </div>
+                                <p class="card-text" th:text="${product.rating}">Rating</p>
+                                <!-- Buttons for Add to Wishlist and View Details -->
+                                <div class="row mt-3">
+
+                                    <!-- Inside the Thymeleaf loop -->
+                                    <form action="/addwishlist" method="post">
+                                        <input type="hidden" name="id" th:value="${product.id}">
+                                        <input type="hidden" name="pid" th:value="${product.pid}">
+                                        <input type="hidden" name="name" th:value="${product.name}">
+                                        <input type="hidden" name="price" th:value="${product.price}">
+                                        <input type="hidden" name="category" th:value="${product.category}">
+                                        <input type="hidden" name="description" th:value="${product.description}">
+                                        <input type="hidden" name="imageUrl" th:value="${product.imageUrl}">
+                                        <input type="hidden" name="rating" th:value="${product.rating}">
+                                        <input type="hidden" name="time" th:value="${product.time}">
+                                        <input type="hidden" name="quantity" th:value="${product.quantity}">
+
+                                        <button type="submit" class="wishlist-btn">
+                                            <span>&#10084;</span> Add to Wishlist
+                                        </button>
+                                    </form>
+
+                                    <div class="modal fade" id="errorMessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                         th:if="${errorMessage}">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- Error message -->
+                                                    <p th:text="${errorMessage}"></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form class="addToCartForm" action="/addcart" method="post">
+                                        <input type="hidden" class="selectedQuantity" name="quantity" value="1"> <!-- Hidden input to store selected quantity -->
+                                        <input type="hidden" name="pid" th:value="${product.pid}" >
+                                        <button type="submit" class="btn btn-primary addToCartBtn" style="height: 30px; display: flex; align-items: center;">
+                                            Add to Cart
+                                        </button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
 
+        <div th:include="Footer.html"></div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            /* Show modal if error message is present */
+            $(document).ready(function () {
+            /* Check if errorMessage variable is defined and not empty */
+            if ([[${errorMessage != null && errorMessage != ''
+            }
+            ]]) {
+            $('#errorMessageModal').modal('show');
+            }
+            }
+            );
+            /*]]>*/
+
+            $(document).ready(function () {
+                // Function to update the hidden input field with the selected quantity
+                $('.quantitySelect').change(function () {
+                    var selectedQuantity = $(this).val();
+                    $(this).closest('.product-card').find('.selectedQuantity').val(selectedQuantity);
+                });
+            });
+
+        </script>
+
     </body>
 </html>

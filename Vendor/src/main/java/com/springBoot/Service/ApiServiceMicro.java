@@ -1,7 +1,7 @@
 package com.springBoot.Service;
 
 
-import com.springBoot.Model.MyData;
+
 import com.springBoot.Model.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

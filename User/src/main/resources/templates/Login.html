@@ -57,6 +57,11 @@
             text-decoration: none;
             font-weight: bold;
         }
+        .at-risk {
+            color: red;
+            font-size: 20px;
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
@@ -64,13 +69,13 @@
 <div class="login-container">
     <div class="login-form">
         <h2>Login</h2>
-        <form action="/dashboard" method="post">
+        <form action="/login" method="post">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" class="form-control" required>
-            </div>
+                    <label for="UserID">User ID:</label><span class="at-risk">*</span>
+                    <input type="text" class="form-control" id="UserID" name="UserID" required>
+                </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Password</label><span class="at-risk">*</span>
                 <input type="password" id="password" name="password" class="form-control" required>
                 <div class="forgot-password">
                     <a href="/forgotpassword">Forgot password?</a>
@@ -78,14 +83,55 @@
             </div>
             <button type="submit" class="btn btn-primary btn-block btn-login">Login</button>
         </form>
+        
+        <!-- modal -->
+        <div class="modal fade" id="errorMessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+                th:if="${errorMessage}">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Error message -->
+                            <p th:text="${errorMessage}"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
         <div class="create-account">
             <p>Don't have an account? <a href="/signup">Create one</a></p>
         </div>
     </div>
+
 </div>
+    
+    
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script th:inline="javascript">
+        /*<![CDATA[*/
+        /* Show modal if error message is present */
+        $(document).ready(function () {
+            /* Check if errorMessage variable is defined and not empty */
+            if ([[${errorMessage != null && errorMessage != ''}
+                ]]) {
+                $('#errorMessageModal').modal('show');
+            }
+        });
+        /*]]>*/
+    </script>
+    
+    
 </body>
 </html>

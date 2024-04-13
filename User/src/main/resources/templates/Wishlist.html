@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Wishlist | Ecommerce Website</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            /* Custom CSS for homepage */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f8f9fa;
+                margin-bottom: 60px; /* Ensure space for the footer */
+            }
+
+            .navbar-brand {
+                font-weight: bold;
+                color: #ffffff; /* Navbar brand text color */
+            }
+
+            .navbar-nav .nav-link {
+                color: #ffffff !important; /* Navbar links color */
+            }
+
+            .search-form {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 200px
+            }
+
+            .search-form input[type="search"] {
+                width: 400px;
+                border-radius: 20px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .search-form button {
+                border-radius: 20px;
+                height: 40px;
+                margin-left: 10px;
+            }
+
+            .product-scroll-container {
+                display: flex;
+                overflow: auto;
+                width: 100%; /* Adjust the width as needed */
+                padding: 10px;
+                margin-bottom: 20px;
+                scrollbar-width: none; /* Hide scrollbar for Firefox */
+                -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer/Edge */
+            }
+
+            .product-scroll-container::-webkit-scrollbar {
+                display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+            }
+
+            .product-card {
+                flex: 0 0 auto;
+                width: 300px;
+                margin-right: 20px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+                transition: box-shadow 0.3s ease;
+            }
+
+            .product-card:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+            }
+
+            .product-card img {
+                width: 100%;
+                height: 30%;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            .product-card .card-body {
+                background-color: #fff;
+                border-radius: 0 0 10px 10px;
+                padding: 20px;
+                overflow-y: auto;
+                height: 100%; /* Make card body take full height */
+            }
+
+            .product-card .description {
+                max-height: 80px; /* Limit description height */
+                overflow: hidden;
+                text-overflow: ellipsis; /* Add ellipsis for overflow text */
+                white-space: nowrap;
+            }
+
+            .footer {
+                bottom: 0;
+                width: 100%;
+                background-color: #343a40;
+                color: #ffffff;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            .wishlist-btn {
+                outline: none;
+                color: #dc3545;
+                cursor: pointer;
+                transition: color 0.3s ease;
+                margin-left: 15px;
+            }
+
+            .wishlist-btn:hover {
+                color: #ff3366;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div th:include="Header.html"></div>
+
+        <!-- Wishlist content -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="mb-4" style="margin: 10px">My Wishlist</h2>
+                    <div class="product-scroll-container">
+                        <!-- Thymeleaf loop for products -->
+                        <div class="d-flex flex-nowrap">
+                            <div th:each="product : ${products}">
+                                <div class="product-card d-flex flex-column">
+                                    <img th:src="${product.imageUrl}" class="card-img-top" alt="Product Image">
+                                    <div class="card-body">
+                                        <!-- Product details -->
+                                        <h5 class="card-title mb-3" th:text="${product.name}">Product Name</h5>
+                                        <p class="card-text mb-2 description" th:text="${product.description}">Description</p>
+                                        <p class="card-text mb-2" th:text="'Price: $' + ${product.price}">Price</p>
+                                        <p class="card-text mb-2" th:text="${product.category}">Category</p>
+                                        <div class="form-group">
+
+                                            <label for="quantitySelect">Quantity:</label>
+                                            <select class="form-control quantitySelect" th:value="${product.quantity}">
+                                                <!-- Option tag for quantity -->
+                                                <option th:each="qty : ${#numbers.sequence(1, product.quantity)}" th:value="${qty}" th:text="${qty}"></option>
+                                            </select>
+
+                                        </div>
+                                        <p class="card-text mb-2" th:text="${product.rating}">Rating</p>
+                                        <!-- Form for adding to wishlist -->
+                                        <form class="addToCartForm" action="/addcart" method="post">
+                                            <input type="hidden" class="selectedQuantity" name="quantity" value="1"> <!-- Hidden input to store selected quantity -->
+                                            <input type="hidden" name="pid" th:value="${product.pid}" >
+                                            <button type="submit" class="btn btn-primary addToCartBtn" style="height: 30px; display: flex; align-items: center;">
+                                                Add to Cart
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Thymeleaf loop -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Wishlist content -->
+
+        <div th:include="Footer.html"></div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                // Function to update the hidden input field with the selected quantity
+                $('.quantitySelect').change(function () {
+                    var selectedQuantity = $(this).val();
+                    $(this).closest('.product-card').find('.selectedQuantity').val(selectedQuantity);
+                });
+            });
+        </script>
+    </body>
+</html>

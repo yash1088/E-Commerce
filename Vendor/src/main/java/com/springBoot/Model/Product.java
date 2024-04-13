@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.springBoot.Model;
+
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
@@ -10,112 +7,138 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/**
- *
- * @author Yash
- */
-
-@Entity  
+@Entity
 @Table(name = "products")
 public class Product {
-    
+
     @Id
+    
     @Column(name = "id")
-    private int Id;
+    @JsonProperty("id")
+    private int id;
     
+    @Column(name = "pid")
+    @JsonProperty("pid")
+    private String pid;
+
     @Column(name = "Name")
-    private String Name;
-    
+    @JsonProperty("name")
+    private String name;
+
     @Column(name = "Price")
-    private String Price;
-    
+    @JsonProperty("price")
+    private double price;
+
     @Column(name = "Category")
-    private String Category;
-    
+    @JsonProperty("category")
+    private String category;
+
     @Column(name = "Description")
-    private String Description;
-    
+    @JsonProperty("description")
+    private String description;
+
     @Column(name = "ImageURL")
     @JsonProperty("imageUrl")
-    private String ImageURL;
-    
+    private String imageUrl;
+
     @Column(name = "Rating")
-    private String Rating;
+    @JsonProperty("rating")
+    private double rating;
 
-    public String getImageURL() {
-        return ImageURL;
+    @Column(name = "Time")
+    @JsonProperty("time")
+    private String time;
+
+    public String getPid() {
+        return pid;
     }
 
-    public String getRating() {
-        return Rating;
-    }
-
-    public void setRating(String Rating) {
-        this.Rating = Rating;
-    }
-
-    public void setImageURL(String ImageURL) {
-        this.ImageURL = ImageURL;
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPrice() {
-        return Price;
+    public double getPrice() {
+        return price;
     }
 
-    public void setPrice(String Price) {
-        this.Price = Price;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getCategory() {
-        return Category;
+        return category;
     }
 
-    public void setCategory(String Category) {
-        this.Category = Category;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public Product() {
     }
 
-    public Product(int Id, String Name, String Price, String Category, String Description, String ImageURL, String Rating) {
-        this.Id = Id;
-        this.Name = Name;
-        this.Price = Price;
-        this.Category = Category;
-        this.Description = Description;
-        this.ImageURL = ImageURL;
-        this.Rating = Rating;
+    public Product(String pid, int id, String name, double price, String category, String description, String imageUrl, double rating, String time) {
+        this.pid = pid;
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.rating = rating;
+        this.time = time;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "Id=" + Id + ", Name=" + Name + ", Price=" + Price + ", Category=" + Category + ", Description=" + Description + ", ImageURL=" + ImageURL + ", Rating=" + Rating + '}';
+        return "Product{" + "pid=" + pid + ", id=" + id + ", name=" + name + ", price=" + price + ", category=" + category + ", description=" + description + ", imageUrl=" + imageUrl + ", rating=" + rating + ", time=" + time + '}';
     }
 
-    
-   
 }

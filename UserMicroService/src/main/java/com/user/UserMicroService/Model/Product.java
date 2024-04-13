@@ -1,4 +1,4 @@
-package com.user.User.Model;
+package com.user.UserMicroService.Model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,6 +6,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "products")
@@ -51,7 +53,7 @@ public class Product {
     @Column(name = "Quantity")
     @JsonProperty("quantity")
     private int quantity;
-
+    
     public String getPid() {
         return pid;
     }

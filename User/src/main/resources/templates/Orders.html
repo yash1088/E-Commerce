@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders | Ecommerce Website</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+            /* Custom CSS for homepage */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f8f9fa;
+                margin-bottom: 60px; /* Ensure space for the footer */
+            }
+            .navbar-brand {
+                font-weight: bold;
+                color: #ffffff; /* Navbar brand text color */
+            }
+
+            .navbar-nav .nav-link {
+                color: #ffffff !important; /* Navbar links color */
+            }
+            .search-form {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 200px
+            }
+            .search-form input[type="search"] {
+                width: 400px;
+                border-radius: 20px;
+                height: 40px;
+                font-size: 16px;
+            }
+            .search-form button {
+                border-radius: 20px;
+                height: 40px;
+                margin-left: 10px;
+            }
+            .product-card {
+                margin-bottom: 20px; /* Adjust vertical margin between product cards */
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+                width: 500px;
+            }
+            .product-card img {
+                width: 100%;
+                height: 200px; /* Adjust the height as needed */
+                object-fit: cover;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+            .product-card .card-body {
+                background-color: #fff;
+                border-radius: 0 0 10px 10px;
+                padding: 20px;
+                height: 200px; /* Fixed height for card body */
+                overflow-y: auto; /* Enable vertical scrollbar if content overflows */
+            }
+            .footer {
+                bottom: 0;
+                width: 100%;
+                background-color: #343a40; /* Footer background color */
+                color: #ffffff;
+                text-align: center;
+                padding: 10px 0;
+            }
+            .wishlist-btn {
+                outline: none;
+                color: #dc3545;
+                cursor: pointer;
+                transition: color 0.3s ease;
+                margin-left: 15px;
+            }
+            .wishlist-btn:hover {
+                color: #ff3366;
+            }
+            .filters {
+                margin-top: 20px;
+                border-right: 1px solid #ccc;
+                padding-right: 20px;
+            }
+            .filter-option {
+                margin-bottom: 20px;
+            }
+            .filter-title {
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            .filter-label {
+                cursor: pointer;
+                display: block;
+                margin-bottom: 5px;
+            }
+            .filter-label:hover {
+                color: #007bff;
+            }
+            .filter-count {
+                color: #6c757d;
+            }
+            .more-link {
+                cursor: pointer;
+                color: #6c757d;
+                margin-top: 10px;
+            }
+            .more-link:hover {
+                color: #007bff;
+            }
+            .checkbox-label {
+                margin-bottom: 5px;
+            }
+            .color-circle {
+                display: inline-block;
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+            .wishlist-btn {
+            color: #ffffff; /* Button text color */
+        }
+        </style>
+</head>
+<body>
+
+<div th:include="Header.html"></div>
+
+<!-- Wishlist content -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>My Orders</h2>
+            <div class="product-card">
+                <img src="https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg" style="width: 150px;height: 150px" alt="Sample Product">
+                <div class="card-body">
+                    <h5 class="card-title">Sample Order Record</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <button class="btn btn-primary wishlist-btn">Remove from Wishlist</button>
+                </div>
+            </div>
+            <!-- Add more sample wishlist items here -->
+        </div>
+    </div>
+</div>
+<!-- End Wishlist content -->
+
+<div th:include="Footer.html"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

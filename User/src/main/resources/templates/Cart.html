@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cart | Ecommerce Website</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            /* Custom CSS for cart page */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f8f9fa;
+                margin-bottom: 60px; /* Ensure space for the footer */
+            }
+
+            .navbar-brand {
+                font-weight: bold;
+                color: #ffffff; /* Navbar brand text color */
+            }
+
+            .navbar-nav .nav-link {
+                color: #ffffff !important; /* Navbar links color */
+            }
+
+            .search-form {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 200px;
+            }
+
+            .search-form input[type="search"] {
+                width: 400px;
+                border-radius: 20px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .search-form button {
+                border-radius: 20px;
+                height: 40px;
+                margin-left: 10px;
+            }
+
+            .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+
+            /* Updated cart item styles */
+
+
+            .main-content {
+                flex: 1;
+                margin-right: 20px;
+            }
+
+            .cart-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .section {
+                margin-top: 15px;
+                border: 1px solid #ced4da; /* Border color */
+                border-radius: 10px;
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .offer-container {
+                background-color: #f8d7da; /* Offer background color */
+            }
+
+            .summary-container {
+                flex: 0 0 30%;
+                border: 1px solid #ced4da; /* Border color */
+                border-radius: 10px;
+                padding: 20px;
+                margin-top: 15px
+            }
+
+            .cart-item {
+                display: flex;
+                margin-bottom: 20px;
+                border-radius: 10px;
+                overflow: hidden;
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: box-shadow 0.3s ease;
+            }
+
+            .cart-item:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+            }
+
+            .cart-item img {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+            }
+
+            .cart-item-details {
+                padding: 20px;
+                flex: 1;
+            }
+
+            .product-name {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .product-description {
+                margin-bottom: 10px;
+            }
+
+            .product-price {
+                font-size: 16px;
+                color: #007bff; /* Price color */
+                margin-bottom: 10px;
+            }
+
+            .product-rating {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+
+            .quantity-label {
+                font-weight: bold;
+            }
+
+            .quantity {
+                margin-right: 10px;
+                font-size: 16px;
+            }
+
+            .remove-btn {
+                background-color: #dc3545; /* Remove button color */
+                color: #fff;
+                border: none;
+                padding: 7px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                margin-right: 10px
+            }
+
+
+            .remove-btn:hover {
+                background-color: #ff3366; /* Remove button hover color */
+            }
+
+            .coupon-input {
+
+                border: 1px solid #ced4da; /* Border color */
+                border-radius: 5px;
+                padding: 8px;
+                margin-bottom: 10px;
+            }
+
+            .apply-btn {
+                background-color: #007bff; /* Apply button color */
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .apply-btn:hover {
+                background-color: #0056b3; /* Apply button hover color */
+            }
+
+            .total-amount {
+                font-size: 18px;
+                font-weight: bold;
+                margin-top: 20px;
+            }
+
+            .coupon-section .col-md-8,
+            .coupon-section .col-md-4 {
+                padding-right: 10px;
+                padding-left: 10px;
+            }
+
+            .checkbox-container {
+                display: flex;
+                align-items: center; /* Align items vertically in the center */
+                gap: 10px; /* Space between items */
+            }
+
+            #selectedProductCount {
+                margin-left: auto; /* Pushes the text to the right */
+            }
+
+            .image-container {
+                position: relative;
+            }
+
+            .image-container input[type="checkbox"] {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            .image-container label {
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                z-index: 2;
+                cursor: pointer;
+                /* You can style the label as needed */
+                color: #fff;
+                background-color: rgba(0, 0, 0, 0.5);
+                padding: 5px;
+                border-radius: 3px;
+            }
+
+
+        </style>
+    </head>
+    <body>
+
+        <div th:include="Header.html"></div>
+
+        <div class="container">
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Check Delivery Section -->
+                <div class="section">
+                    <h4>Check Delivery</h4>
+                    <p>Enter your PIN code to check delivery time & service:</p>
+                    <input type="text" placeholder="Enter PIN Code">
+                    <button>Check</button>
+                </div>
+
+                <!-- Available Offers Section -->
+                <div class="section offer-container">
+                    <h4>Available Offers</h4>
+                    <p>5% offer on Axis Bank Credit Card <a href="#">More detail...</a></p>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            More Offers
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">10% off on HDFC Credit Card</a>
+                            <a class="dropdown-item" href="#">15% cashback on Paytm wallet</a>
+                            <a class="dropdown-item" href="#">20% discount on ICICI Debit Card</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cart Items Section -->
+                <div class="container cart-container">
+                    <!-- Checkbox to select/deselect all products -->
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="selectAllProducts" >
+                        <label for="selectAllProducts">Select All Products</label>
+                        <!-- Text displaying the number of products selected -->
+                        <div id="selectedProductCount">0/[[${products.size()}]] product(s) selected</div>
+                    </div>
+
+                    <!-- Loop through each product -->
+                    <!-- Loop through each product -->
+<div th:each="product, iterStat : ${products}" class="section cart-item">
+    <!-- Checkbox to select/deselect the product -->
+    <div class="checkbox-container">
+        <input type="checkbox" id="productCheckbox[[${iterStat.index}]]" class="product-checkbox">
+        <label for="productCheckbox[[${iterStat.index}]]"></label>
+    </div>
+    <div class="image-container">
+        <!-- Product image -->
+        <img th:src="${product.imageUrl}" alt="Product Image">
+    </div>
+    <div class="cart-item-details">
+        <!-- Product details -->
+        <h5 class="product-name" th:text="${product.name}"></h5>
+        <p class="product-description" th:text="${product.description}"></p>
+        <p class="product-price" th:text="'$' + ${product.price}"></p>
+        <p class="product-rating" th:text="${product.rating} + ' stars'"></p>
+        <div>
+            <span class="quantity-label">Quantity:</span>
+            <span class="quantity" th:text="${product.quantity}"></span>
+        </div>
+        <hr>
+        <form action="/removecart" method="POST" style="display: inline;">
+            <input type="hidden" name="pid" th:value="${product.pid}">
+            <button type="submit" class="remove-btn">Remove</button>
+        </form>
+        <a href="/wishlist" class="btn btn-primary" style="display: inline-block;">Move to wishlist</a>
+    </div>
+</div>
+
+                </div>
+            </div>
+
+            <!-- Product Order Summary Section -->
+            <div class="summary-container">
+                <h4 style="margin-bottom: 10px">Coupons</h4>
+                <div class="coupon-section">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control coupon-input" placeholder="Enter Coupon Code">
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-primary apply-btn btn-block">Apply</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h4 >Price Details</h4>
+
+                <div class="amount-details" style="margin-bottom: 20px">
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-md-6">
+                            <p>Actual Amount:</p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p>$XXX.XX</p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left: 0.5px">
+                        <div >
+                            <p>Discounted Amount:</p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p>$YYY.YY</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Coupon Discount:</p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p>$ZZZ.ZZ</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Shipping Fees:</p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p>$WWW.WW</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Total Amount:</h5>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <h5>$TTT.TT</h5>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success place-order-btn btn-block">Place Order</button>
+            </div>
+        </div>
+
+        <div th:include="Footer.html"></div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+        <script>
+    $(document).ready(function () {
+        // Function to update the count of selected products
+        function updateSelectedCount() {
+            var selectedCount = $('.product-checkbox:checked').length;
+            $('#selectedProductCount').text(selectedCount + '/' + ${products.size()} + ' product(s) selected');
+        }
+
+        // Event listener for checkbox change
+        $('.product-checkbox').change(function () {
+            updateSelectedCount();
+        });
+
+        // Event listener for "Select All Products" checkbox
+        $('#selectAllProducts').change(function () {
+            $('.product-checkbox').prop('checked', $(this).prop('checked'));
+            updateSelectedCount();
+        });
+
+        // Initial count update
+        updateSelectedCount();
+    });
+</script>
+
+
+
+    </body>
+</html>

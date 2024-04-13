@@ -6,12 +6,8 @@ package com.springBoot.Controller;
  */
 
 
+import com.springBoot.Model.Product;
 import com.springBoot.Service.ApiServiceMicro;
-import com.springBoot.Model.MyData;
-import com.springBoot.Model.Product;
-import com.springBoot.Model.Product;
-import com.springBoot.Service.ApiService;
-import com.springBoot.Service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +35,6 @@ import org.springframework.web.context.annotation.ApplicationScope;
 
 @Controller
 public class VendorController {
-
-    @Autowired
-    ProductService proservice;
-    
-    @Autowired  
-    ApiService apiService;
     
     @Autowired
     ApiServiceMicro api;
@@ -83,23 +73,9 @@ public class VendorController {
         return "Dashboard";
     }
     
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public String products(Model m) {
-        System.out.println("products GET");
-        List<Product> productList = proservice.getProduct();
-        System.out.println(productList);
-        m.addAttribute("productList",productList);
-        m.addAttribute("name","Yash");
-        return "products";
-    }
     
-    @RequestMapping(value = "/products", method = RequestMethod.POST)
-    public String addprodcut(@ModelAttribute Product product) {
-        System.out.println("Add products");
-        System.out.println("Product"+product);
-        proservice.save(product);
-        return "redirect:/products";
-    }
+    
+    
     
     @RequestMapping("/customers")
     public String customers() {
@@ -121,7 +97,7 @@ public class VendorController {
     
     
     @RequestMapping("/addproduct")
-    public String addproduct(@ModelAttribute Product product) {
+    public String addproduct() {
         System.out.println("addproduct.......");
         return "addproduct";
     }
@@ -143,12 +119,7 @@ public class VendorController {
         return "editproduct";
     }
     
-    @RequestMapping(value = "/showedittedproduct", method = RequestMethod.POST)
-    public String showedittedproduct(@ModelAttribute Product product) {
-        System.out.println("showedittedproduct.......");
-        proservice.update(product);
-        return "redirect:/products";
-    }
+    
     
     @RequestMapping("/deleteproduct")
     public String deleteproduct(@ModelAttribute Product product) {
@@ -156,12 +127,7 @@ public class VendorController {
         return "deleteproduct";
     }
     
-    @RequestMapping(value = "/showdeletedproduct", method = RequestMethod.POST)
-    public String showdeletedproduct(@ModelAttribute Product product, @RequestParam("Id") String id) {
-        System.out.println("showdeletedproduct......."+id);
-        proservice.delete(Integer.parseInt(id));
-        return "redirect:/products";
-    }
+    
     
     @RequestMapping("/user/{id}")
     public String deleteproduct(@PathVariable("id") String id) {

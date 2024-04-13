@@ -14,6 +14,10 @@ public class Product {
     @Column(name = "id")
     @JsonProperty("id")
     private int id;
+    
+    @Column(name = "pid")
+    @JsonProperty("pid")
+    private String pid;
 
     @Column(name = "Name")
     @JsonProperty("name")
@@ -21,7 +25,7 @@ public class Product {
 
     @Column(name = "Price")
     @JsonProperty("price")
-    private String price;
+    private double price;
 
     @Column(name = "Category")
     @JsonProperty("category")
@@ -31,30 +35,28 @@ public class Product {
     @JsonProperty("description")
     private String description;
 
-    
     @Column(name = "ImageURL")
     @JsonProperty("imageUrl")
-    private String imageURL;
-    
+    private String imageUrl;
+
     @Column(name = "Rating")
     @JsonProperty("rating")
-    private String rating;
+    private double rating;
 
-    public String getRating() {
-        return rating;
+    @Column(name = "Time")
+    @JsonProperty("time")
+    private String time;
+
+    @Column(name = "Quantity")
+    @JsonProperty("quantity")
+    private int quantity;
+
+    public String getPid() {
+        return pid;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-   
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 
     public int getId() {
@@ -73,11 +75,11 @@ public class Product {
         this.name = name;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -97,23 +99,57 @@ public class Product {
         this.description = description;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public Product() {
     }
 
-    public Product(int id, String name, String price, String category, String description, String imageURL, String rating) {
+    public Product(String pid, int id, String name, double price, String category, String description, String imageUrl, double rating, String time, int quantity) {
+        this.pid = pid;
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
         this.description = description;
-        this.imageURL = imageURL;
+        this.imageUrl = imageUrl;
         this.rating = rating;
+        this.time = time;
+        this.quantity = quantity;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", price=" + price + ", category=" + category + ", description=" + description + ", imageURL=" + imageURL + ", rating=" + rating + '}';
+        return "Product{" + "pid=" + pid + ", id=" + id + ", name=" + name + ", price=" + price + ", category=" + category + ", description=" + description + ", imageUrl=" + imageUrl + ", rating=" + rating + ", time=" + time + ", quantity=" + quantity + '}';
     }
 
-    
 }
